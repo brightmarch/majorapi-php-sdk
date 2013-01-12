@@ -1,0 +1,16 @@
+{
+    "name": "brightmarch/majorapi-php-sdk",
+    "description": "The MajorApi PHP SDK.",
+    "keywords": ["restful","rest","majorapi","quickbooks","sdk"],
+    "type": "majorapi-sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vic Cherubini",
+            "email": "vic@brightmarch.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    }
+}
