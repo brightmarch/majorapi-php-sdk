@@ -3,10 +3,10 @@
 
 require_once __DIR__ . '/../lib/MajorApiQuickbooks.php';
 
-$APPLICATION_USERNAME = 'brightmarch';
-$APPLICATION_APIKEY = '54gktz61Z6jzOSNeup35k7gVqqFwKnRA';
-$CUSTOMER_NAME = 'Maynard James Keenan';
-$ITEM_NAME = 'BMService';
+$APPLICATION_USERNAME = '';
+$APPLICATION_APIKEY = '';
+$CUSTOMER_NAME = '';
+$ITEM_NAME = '';
 
 $majorApiQuickbooks = new MajorApiQuickbooks(
     $APPLICATION_USERNAME,
@@ -14,7 +14,7 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableDevelopment();
+    $majorApiQuickbooks->enableProduction();
     $quickbooksInvoice = $majorApiQuickbooks->createInvoice([
         'refNumber' => mt_rand(1, 1000000),
         'customerName' => $CUSTOMER_NAME,
