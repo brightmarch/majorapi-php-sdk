@@ -3,9 +3,9 @@
 
 require_once __DIR__ . '/../lib/MajorApiQuickbooks.php';
 
-$APPLICATION_USERNAME = 'brightmarch';
-$APPLICATION_APIKEY = '54gktz61Z6jzOSNeup35k7gVqqFwKnRA';
-$CUSTOMER_ID = 11;
+$APPLICATION_USERNAME = '';
+$APPLICATION_APIKEY = '';
+$CUSTOMER_ID = 12;
 
 $majorApiQuickbooks = new MajorApiQuickbooks(
     $APPLICATION_USERNAME,
@@ -13,7 +13,7 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableDevelopment();
+    $majorApiQuickbooks->enableProduction();
     $quickbooksCustomer = $majorApiQuickbooks->retrieveCustomer($CUSTOMER_ID);
 
     echo(sprintf(
