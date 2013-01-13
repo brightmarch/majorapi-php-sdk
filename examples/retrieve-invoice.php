@@ -3,9 +3,9 @@
 
 require_once __DIR__ . '/../lib/MajorApiQuickbooks.php';
 
-$APPLICATION_USERNAME = 'brightmarch';
-$APPLICATION_APIKEY = '54gktz61Z6jzOSNeup35k7gVqqFwKnRA';
-$INVOICE_ID = 8;
+$APPLICATION_USERNAME = 'your-majorapi-application-username';
+$APPLICATION_APIKEY = 'your-majorapi-application-api-key';
+$INVOICE_ID = 0; // Update to valid MajorApi Invoice ID
 
 $majorApiQuickbooks = new MajorApiQuickbooks(
     $APPLICATION_USERNAME,
@@ -13,7 +13,7 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableDevelopment();
+    $majorApiQuickbooks->enableProduction();
     $quickbooksInvoice = $majorApiQuickbooks->retrieveInvoice($INVOICE_ID);
 
     echo(sprintf(

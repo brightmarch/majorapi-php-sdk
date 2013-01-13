@@ -3,8 +3,8 @@
 
 require_once __DIR__ . '/../lib/MajorApiQuickbooks.php';
 
-$APPLICATION_USERNAME = '';
-$APPLICATION_APIKEY = '';
+$APPLICATION_USERNAME = 'your-majorapi-application-username';
+$APPLICATION_APIKEY = 'your-majorapi-application-api-key';
 
 $majorApiQuickbooks = new MajorApiQuickbooks(
     $APPLICATION_USERNAME,
