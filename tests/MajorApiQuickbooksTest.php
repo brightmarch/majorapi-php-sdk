@@ -41,15 +41,6 @@ class MajorApiQuickbooksTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException MajorApiException
      */
-    public function testCreatingCustomerRequiresNameAttribute()
-    {
-        $maq = new MajorApiQuickbooks('username', 'apikey');
-        $maq->createCustomer([]);
-    }
-
-    /**
-     * @expectedException MajorApiException
-     */
     public function testCreatingCustomerRequiresNoErrors()
     {
         $maq = new MajorApiQuickbooks('username', 'apikey');

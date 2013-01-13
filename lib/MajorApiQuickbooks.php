@@ -29,14 +29,12 @@ class MajorApiQuickbooks
 
     public function createCustomer(array $customer)
     {
-        if (!array_key_exists('name', $customer)) {
-            throw new MajorApiException(
-                "The name attribute is required " .
-                "when creating a new customer."
-            );
-        }
-
         return $this->_sendRequest('POST', 'customers', $customer);
+    }
+
+    public function createInvoice(array $invoice)
+    {
+        return $this->_sendRequest('POST', 'invoices', $invoice);
     }
 
     public function retrieveInvoice($invoiceId)
