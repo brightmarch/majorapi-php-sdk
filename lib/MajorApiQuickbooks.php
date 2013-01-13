@@ -39,9 +39,23 @@ class MajorApiQuickbooks
         return $this->_sendRequest('POST', 'customers', $customer);
     }
 
+    public function retrieveInvoice($invoiceId)
+    {
+        $resource = sprintf('invoices/%d', (int)$invoiceId);
+
+        return $this->_sendRequest('GET', $resource);
+    }
+
     public function retrieveCustomer($customerId)
     {
         $resource = sprintf('customers/%d', (int)$customerId);
+
+        return $this->_sendRequest('GET', $resource);
+    }
+
+    public function retrieveItem($itemName)
+    {
+        $resource = sprintf('items/%s', $itemName);
 
         return $this->_sendRequest('GET', $resource);
     }
@@ -87,7 +101,7 @@ class MajorApiQuickbooks
         $url = sprintf(
             '%s%s',
             $this->getUrl(),
-            strtolower($resource)
+            $resource
         );
 
         $authorization = sprintf(
