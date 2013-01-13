@@ -82,10 +82,6 @@ class MajorApiQuickbooks
 
 
 
-
-
-
-
     private function _sendRequest($method, $resource, array $entity=[])
     {
         $url = sprintf(

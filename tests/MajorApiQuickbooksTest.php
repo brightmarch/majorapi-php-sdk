@@ -55,7 +55,7 @@ class MajorApiQuickbooksTest extends PHPUnit_Framework_TestCase
         $maq = new MajorApiQuickbooks('username', 'apikey');
         $maq->enableDevelopment();
 
-        $maq->createCustomer(['name' => 'Maynard James Keenan Ivory Waynes World of Mars']);
+        $maq->createCustomer(['name' => 'Maynard James Keenan Ivory Waynes World Fair 2013']);
     }
 
 }
