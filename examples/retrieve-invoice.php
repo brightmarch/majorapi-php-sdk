@@ -13,7 +13,6 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableProduction();
     $quickbooksInvoice = $majorApiQuickbooks->retrieveInvoice($INVOICE_ID);
 
     echo(sprintf(

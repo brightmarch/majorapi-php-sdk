@@ -14,7 +14,6 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableProduction();
     $quickbooksInvoice = $majorApiQuickbooks->createInvoice([
         'refNumber' => mt_rand(1, 1000000),
         'customerName' => $CUSTOMER_NAME,

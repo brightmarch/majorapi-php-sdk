@@ -12,7 +12,6 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableProduction();
     $quickbooksCustomer = $majorApiQuickbooks->createCustomer([
         'name' => 'Maynard James Keenan',
         'firstName' => 'Maynard',

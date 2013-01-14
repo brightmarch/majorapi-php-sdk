@@ -17,14 +17,25 @@ class MajorApiQuickbooks
     /** @var string */
     private $url = '';
 
+    /* @var array */
     private $successCodes = [200, 201, 202];
+
+    /** @const integer */
+    const PRODUCTION_API_KEY_LENGTH = 32;
+
+    /** @const integer */
+    const STAGING_API_KEY_LENGTH = 24;
+
+    /** @const integer */
+    const DEVELOPMENT_API_KEY_LENGTH = 16;
 
     public function __construct($applicationUsername, $applicationApiKey)
     {
         $this->applicationUsername = strtolower($applicationUsername);
-        $this->applicationApiKey = $applicationApiKey;
+        $this->applicationApiKey = trim($applicationApiKey);
 
-        $this->_configureUrls();
+        $this->_configureUrls()
+            ->_determineUrl();
     }
 
     public function createCustomer(array $customer)
@@ -58,34 +69,11 @@ class MajorApiQuickbooks
         return $this->_sendRequest('GET', $resource);
     }
 
-    public function enableProduction()
-    {
-        $this->url = $this->urls['production'];
-
-        return $this;
-    }
-
-    public function enableStaging()
-    {
-        $this->url = $this->urls['staging'];
-
-        return $this;
-    }
-
-    public function enableDevelopment()
-    {
-        $this->url = $this->urls['development'];
-
-        return $this;
-    }
-
     public function getUrl()
     {
         if (empty($this->url)) {
             throw new MajorApiException(
-                "No URL is configured. Please call one of " .
-                "enableProduction(), enableStaging(), or " .
-                "enableDevelopment() to configure the proper URL."
+                "No URL is configured. Please use a valid API Key."
             );
         }
 
@@ -124,19 +112,22 @@ class MajorApiQuickbooks
         }
 
         $curl = curl_init();
-        curl_setopt_array($curl, $options);
-        $response = json_decode(curl_exec($curl));
-        $responseCode = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            curl_setopt_array($curl, $options);
+            $responseJson = curl_exec($curl);
+            $responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+
+        $responseJsonDecoded = json_decode($responseJson);
 
         if (!in_array($responseCode, $this->successCodes)) {
             throw new MajorApiException(sprintf(
                 "An error occurred when attempting to contact " .
                 "the MajorApi: QuickBooks REST API. The error states: %s",
-                $response->message
+                $responseJsonDecoded->message
             ));
         }
 
-        return $response;
+        return $responseJsonDecoded;
     }
 
     private function _configureUrls()
@@ -146,6 +137,21 @@ class MajorApiQuickbooks
             'staging' => 'https://staging.majorapi.com/api/quickbooks/',
             'development' => 'http://localhost:8000/api/quickbooks/'
         ];
+
+        return $this;
+    }
+
+    private function _determineUrl()
+    {
+        $apiKeyLength = strlen($this->applicationApiKey);
+
+        if ($apiKeyLength == self::PRODUCTION_API_KEY_LENGTH) {
+            $this->url = $this->urls['production'];
+        } elseif ($apiKeyLength == self::STAGING_API_KEY_LENGTH) {
+            $this->url = $this->urls['staging'];
+        } elseif ($apiKeyLength == self::DEVELOPMENT_API_KEY_LENGTH) {
+            $this->url = $this->urls['development'];
+        }
 
         return $this;
     }

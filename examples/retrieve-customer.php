@@ -13,7 +13,6 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableProduction();
     $quickbooksCustomer = $majorApiQuickbooks->retrieveCustomer($CUSTOMER_ID);
 
     echo(sprintf(

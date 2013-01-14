@@ -13,7 +13,6 @@ $majorApiQuickbooks = new MajorApiQuickbooks(
 );
 
 try {
-    $majorApiQuickbooks->enableProduction();
     $quickbooksItem = $majorApiQuickbooks->retrieveItem($ITEM_NAME);
 
     echo(sprintf(
