@@ -48,9 +48,9 @@ class MajorApiQuickbooks
         return $this->_sendRequest('POST', 'invoices', $invoice);
     }
 
-    public function retrieveInvoice($invoiceId)
+    public function retrieveInvoice($refNumber)
     {
-        $resource = sprintf('invoices/%d', (int)$invoiceId);
+        $resource = sprintf('invoices/%s', $refNumber);
 
         return $this->_sendRequest('GET', $resource);
     }
