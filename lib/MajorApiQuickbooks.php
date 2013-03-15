@@ -43,14 +43,30 @@ class MajorApiQuickbooks
         return $this->_sendRequest('POST', 'customers', $customer);
     }
 
-    public function createInvoice(array $invoice)
+    public function createInvoice(array $order)
     {
-        return $this->_sendRequest('POST', 'invoices', $invoice);
+        $order['type'] = 'invoice';
+
+        return $this->_sendRequest('POST', 'orders', $order);
+    }
+
+    public function createSalesOrder(array $order)
+    {
+        $order['type'] = 'sales-order';
+
+        return $this->_sendRequest('POST', 'orders', $order);
     }
 
     public function retrieveInvoice($refNumber)
     {
-        $resource = sprintf('invoices/%s', $refNumber);
+        $resource = sprintf('orders/%s', $refNumber);
+
+        return $this->_sendRequest('GET', $resource);
+    }
+
+    public function retrieveSalesOrder($refNumber)
+    {
+        $resource = sprintf('orders/%s', $refNumber);
 
         return $this->_sendRequest('GET', $resource);
     }
